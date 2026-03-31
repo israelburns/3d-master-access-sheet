@@ -175,12 +175,84 @@ python build.py
 python -m http.server 8080  # for desktop testing
 ```
 
+## Interactive Project Stations (CIAK Integration)
+
+The 3D world is not just a data viewer — **projects are living entities you walk up to and interact with**. Each Active Project (17 total in master sheet) gets its own interactive station within its wing corridor.
+
+### Project Station Design
+Each station is a **kiosk/terminal** in the corridor, distinct from the data panels:
+- Physical form: A standing terminal/pedestal with a glowing screen (wing-colored frame)
+- Project name and status displayed overhead (like a store department sign)
+- Status indicator: pulsing green = active, red = blocked, amber = needs attention
+- Walk-up proximity trigger: when user is within 2m, the station "wakes up"
+  - Screen lights up brighter
+  - Shows project summary, last activity, current status
+  - Audio cue (subtle chime)
+- **Interact button** (trigger click): Opens full interactive panel with:
+  - Project description, architecture, key files
+  - Current status and recent changes
+  - Subsections as selectable tabs
+  - Command reference (what CLI commands the project supports)
+  - Links to related projects (shown as glowing lines to other stations)
+
+### CIAK (Cartesian Identity Access Key) — The Gatekeeper
+CIAK is special. It's the **authentication system** for the entire world:
+- Located at the **hub entrance** — a prominent terminal before you enter any wing
+- CIAK uses cognitive continuity authentication: verifies identity through trajectory of thought, not static passwords
+- Architecture: Cold Layer (encrypted vault), Warm Layer (SQLite DAG), Challenge Engine, Behavioral analysis
+- Trust Levels: 0 (Anonymous) → 5 (Full CIAK)
+- **VR Flow**:
+  1. On spawn, CIAK station presents a challenge (adaptive dilemma from challenge engine)
+  2. User responds via voice (ties into voice_relay_win.py transcription)
+  3. CIAK evaluates coherence score and disfluency patterns
+  4. Trust level determines which wings/stations are accessible
+  5. Higher trust = deeper access (e.g., Credentials Vault requires Trust Level 3+)
+- CIAK station has a unique visual: a central pillar with rotating identity graph visualization
+- Shows the user's trust level, coherence score, session history
+
+### Project Interconnections
+- Projects that work together show **glowing connection lines** between their stations
+- Example: Browser Walker ↔ Security Scout ↔ Security Coach form a cluster
+- Example: Seller Leads ↔ Property Finder ↔ Google Contacts Automation
+- Grabbing a project tab shows its connections light up across the world
+- Related project beacons pulse when you're holding a connected project's tab
+
+### 17 Active Projects (from Master Sheet)
+| # | Project | Wing | Key Interaction |
+|---|---------|------|-----------------|
+| 0 | Chidiebere Mortgage Modification | COMMAND CENTER | Priority override display |
+| 1 | Legacy Vault (Solana) | PROJECTS & TOOLS | Blockchain status, deployment |
+| 2 | Real Estate Prospecting | PROJECTS & TOOLS | Pipeline metrics, lead flow |
+| 3 | $SUGAR Play-to-Earn | PROJECTS & TOOLS | Token metrics, arcade status |
+| 4 | Buy Bot (Grid Trading) | PROJECTS & TOOLS | Trade positions, P&L |
+| 5 | Video Dubber (DoppleVox) | PROJECTS & TOOLS | Processing queue |
+| 6 | Security Scout | OPERATIONS | Scan reports, findings |
+| 7 | **CIAK** | **HUB (Gatekeeper)** | Identity verification |
+| 8 | Browser Walker V2 | OPERATIONS | Workflow status, checkpoints |
+| 9 | Security Coach | OPERATIONS | Incident drills, scores |
+| 10 | Seller Leads Pipeline | PROJECTS & TOOLS | Deal flow, owner cache |
+| 11 | Ace Burns Security | COMMS & LOGS | Client roster, events |
+| 12 | Wolf Pack Fast Link | COMMS & LOGS | Fasting tracker |
+| 13 | Sugar Arbitrage | PROJECTS & TOOLS | Solana trading metrics |
+| 14 | Mouse Business LLP | COMMS & LOGS | Partnership docs |
+| 15 | Engagement-Gated SMS | COMMS & LOGS | Client effort scores |
+| 16 | Ace Player | OPERATIONS | Playback status (BROKEN) |
+
+### Voice Integration
+- Each project station supports **voice interaction** via the voice relay system
+- Walk up to a station, press Ctrl+Shift+R, speak your question
+- Transcribed text is routed to the relevant project context
+- Future: station responds with synthesized voice (TTS) reading status/data back
+
 ## Priority Order for Implementation
 1. Hub + corridors + wall panels (walkable world)
 2. Overhead aisle signs (Walmart-style)
 3. Click-to-open scrolling tablets
 4. GitHub sync on load + session log at spawn
-5. Grab & carry tablets
-6. Hotbar HUD
-7. Beacons
-8. Tab linking
+5. **Project stations as interactive kiosks** (distinct from data panels)
+6. **CIAK gatekeeper at hub entrance**
+7. Grab & carry tablets
+8. Hotbar HUD
+9. Beacons + project interconnection lines
+10. Tab linking
+11. Voice interaction at stations
